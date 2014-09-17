@@ -16,7 +16,6 @@ define(/*'forms/<%= collection.name %>',*/['models/<%= collection.name %>'], fun
             }
         });
 
-        console.log('USER SESSION', userRoles);
     %>
 
     Backbone.Form.<%= collection.name.toCamelCase() %> = Backbone.Form.extend({
