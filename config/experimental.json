@@ -40,22 +40,13 @@
             "previewUrl": "/user/${username}",
             "backboneForms": {
                 "schema": {
-                    
                     "fullname": { "type": "Text", "title": "Full Name", "validators": ["required"], "editorAttrs": { "placeholder": "John Doe" } }, 
-                    
                     "email": { "type": "Text", "title": "Email", "validators": ["required", "email"], "editorAttrs": { "placeholder": "john-doe@example.com" } }, 
                     "password": { 
                         "type": "Password", 
                         "title": "Password", 
                         "validators": ["required"], 
-                        "editorAttrs": { "placeholder": "password" },
-                         "conditionals": [
-                            {
-                                "page": "create",
-                                "remove": true
-                            }
-                        ],
-                        "permissions": ["test"]
+                        "editorAttrs": { "placeholder": "password" }
                     }, 
                     "username": {
                         "validators": [
@@ -77,19 +68,9 @@
                                 "return '[\\'' + global.config.roles.map(function(r) { return r.name; }).join('\\',\\'') + '\\']';"
                             ],
                             "__call": []
-                        },
-                        "conditionals": [
-                            {
-                                "roles": ["test"],
-                                "props": {
-                                    "options": ["TEST"]
-                                }
-                            }
-                        ]
+                        }
                     },
-                    "bio": { "type": "CKEditor", "title": "Bio",
-                        "permissions": ["test"]
-                    },
+                    "bio": { "type": "CKEditor", "title": "Bio" },
                     "photo": { "type": "Image", "title": "Photo", "pushToS3": true },
                     "position": { "type": "Text", "title": "Position", "validators": [] },
                     "company": { "type": "Text", "title": "Company", "validators": [] }
