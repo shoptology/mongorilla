@@ -21,6 +21,7 @@ define('views/generic/form', [
             'click .submit': 'submit',
             'click .submit-draft': 'submitDraft',
             'click .remove': 'remove',
+            'change': 'checkConditionals'
         },
 
         initialize: function (options) {
@@ -228,6 +229,10 @@ define('views/generic/form', [
                     });
                 }
             });
+        },
+
+        checkConditionals: function() {
+
         },
 
         /* adds compatibility to form refreshing on model change */
