@@ -36,11 +36,7 @@
             "backboneForms": {
                 "schema": {
                     "firstname": { "type": "Text", "title": "First Name", "validators": ["required"] },
-                    "lastname": { "type": "Text", "title": "Last Name", "validators": ["required"], "depends": {
-                    		"firstname": {
-                    			"*": "show"
-                    		}
-                    	} },
+                    "lastname": { "type": "Text", "title": "Last Name", "validators": ["required"] },
                     "twitter.username": { "type": "Text", "title": "Twitter Username", "editorAttrs": { "placeholder": "@YourTwitterAccount" } },
                     "github.username": { "type": "Text", "title": "GitHub Username", "help": "e.g. pepe" },
                     "dob": { "type": "Datepicker", "title": "Day of Birth", "editorAttrs": { "placeholder": "dd/mm/yyyy", "format": "dd/mm/yyyy" } },

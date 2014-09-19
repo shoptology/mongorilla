@@ -268,21 +268,16 @@ define('views/generic/form', [
 
         	for(var d in deps) {
         		for(var r in deps[d]) {
-        			console.log(r, deps[d][r], d);
         			var action = deps[d][r];
         			var reaction = (action == 'show') ? 'slideUp' : 'slideDown';
         			
         			if(value.trim() == r || (r == '*' && value.trim() !== '')) {
         				$('.form-control[name="' + d + '"]').closest('.form-group')[action]();
-        				console.log(action + 'ing ' + d);
         			} else {
         				$('.form-control[name="' + d + '"]').closest('.form-group')[reaction]();
-        				console.log(reaction + 'ing ' + d);
         			}
         		}
         	}
-        	
-        	console.log(deps);
         },
 
         /* adds compatibility to form refreshing on model change */
