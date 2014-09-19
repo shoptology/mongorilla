@@ -13,6 +13,11 @@
                 "mongorillaUser": "crud",
                 "mongorillaCollection": "crud",
                 "fruit": "crud"
+            },
+            "scope": {
+                "company": { 
+                    "$or": [ { "uri": "comp" }, { "uri": "erser" } ] 
+                }
             }
         },
         {
