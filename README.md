@@ -25,6 +25,28 @@ Mongorilla is a NodeJS application, distributed via NPM which also have both: NP
 * Revisioning - You can rollback document revisions very easily, by navigating an edition tmieline!
 * Customizing Mongorilla from the source code is not as terrible as in other CMSs.  Even tweaking forms, you can create your own editors, create backend hooks and even, re-use the REST API to serve the content to your frontend app.
 
+## Configuration
+
+### Role-based Filters
+You can now add filtered views for collections based on the user's role.  Here is an example using the ``scope`` parameter underneath the user in ``default.json``:
+
+```
+{
+    "name": "admin",
+    "permissions": {
+        "developer": "crud",
+        "company": "crud",
+    },
+    "scope": {
+        "company": { 
+            "$or": [ { "name": "Test" }, { "uri": "test" } ] 
+        }
+    }
+}
+```
+
+This will only show items in the search view that pass this mongo query filter.
+
 ##Installation
 
 ### Using Git
