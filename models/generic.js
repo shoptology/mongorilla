@@ -101,7 +101,6 @@ exports.getModel = function (collectionName) {
             }
         });
 
-
         return mongoose.model(collectionName);
     }
 }
