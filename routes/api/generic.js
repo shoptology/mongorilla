@@ -190,6 +190,27 @@ exports.getSearch = function (req, res) {
     var findParams = global.helpers.toJS(global.helpers.deepClone(collection.fastSearch.find), function (arg) {
         return arg.replace(/\$\{q\}/g, q);
     });
+    //findParams.uri = "comp";
+    console.log('Session', res.locals.sessionUser);
+    console.log('Roles', global.config.roles);
+
+    var userRoles = res.locals.sessionUser.roles;
+    var roles = global.config.roles;
+    for (var i = userRoles.length - 1; i >= 0; i--) {
+        userRole = userRoles[i];
+        _.each(roles, function(role) {
+            console.log(userRole, role.name);
+            if(userRole == role.name && role.scope && role.scope[collection.name]) {
+                console.log('Name Match with scope for this collection', userRole, role.name);
+                _.each(role.scope[collection.name], function(scope, key) {
+                    findParams[key] = scope;
+                });
+            }
+        });
+    };
+    //findParams['$or'] = [ { 'uri': 'comp' }, { 'uri': 'erser' } ];
+    console.log("FindParams", findParams);
+
 
     getModel(collection.name)
         .find(findParams, collection.fastSearch.columns.join(' ') + ' ' + collection.toStringField)

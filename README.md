@@ -25,6 +25,28 @@ Mongorilla is a NodeJS application, distributed via NPM which also have both: NP
 * Revisioning - You can rollback document revisions very easily, by navigating an edition tmieline!
 * Customizing Mongorilla from the source code is not as terrible as in other CMSs.  Even tweaking forms, you can create your own editors, create backend hooks and even, re-use the REST API to serve the content to your frontend app.
 
+## Configuration
+
+### Role-based Filters
+You can now add filtered views for collections based on the user's role.  Here is an example using the ``scope`` parameter underneath the user in ``default.json``:
+
+```
+{
+    "name": "admin",
+    "permissions": {
+        "developer": "crud",
+        "company": "crud",
+    },
+    "scope": {
+        "company": { 
+            "$or": [ { "name": "Test" }, { "uri": "test" } ] 
+        }
+    }
+}
+```
+
+This will only show items in the search view that pass this mongo query filter.
+
 ##Installation
 
 ### Using Git
@@ -74,6 +96,32 @@ Here are the steps to building your own custom editors:
 3. Add the correct Mongoose property to the switch statement in `models/generic.js`
 4. Add a field to your JSON schema with the type property named after your editor
 5. Build out your functionality!
+
+
+## Dependent Fields
+
+Dependent fields allow you to show or hide form elements based on a set of rules you define. 
+This can be because it allows you to surface or remove certain inputs as they are, or are not, needed for completion of your form.
+
+Currently, simple (on/off) dependent fields are supported.  
+
+To use this feature you need to apply some attributes to the dependent field's schema.  
+The object is formatted like this:  
+
+	"yourDependentField" : {  
+		...  
+		"depends" : {  
+			"nameOfParentField" : {  
+				"value" : "action"  
+			}  
+		}  
+	}  
+
+The "value" key should match the value you want the parent to have in order to apply the "action" to the child form. "*" is supported as a wildcard to match any non-empty value.
+
+The "action" value currently supports "show" and "hide".  
+Forms with the "show" action start off hidden.  
+Forms with the "hide" action start off visible.
 
 ## Roadmap
 * Improve documentation
